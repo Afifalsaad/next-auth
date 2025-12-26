@@ -4,9 +4,14 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { SiMongodb } from "react-icons/si";
 import Link from "next/link";
 import LoginButton from "@/components/LoginButton";
-export default function Home() {
+import UserCard from "@/components/UserCard";
+import { getServerSession } from "next-auth";
+export default async function Home() {
+  const session = await getServerSession();
   return (
     <div className="min-h-screen relative flex flex-col justify-center items-center gap-5 ">
+      <UserCard></UserCard>
+
       <div className=" flex gap-5 space-x-4 items-center">
         <FaReact
           size={40}
@@ -23,6 +28,13 @@ export default function Home() {
         <Link href={"/register"} className="btn">
           Register
         </Link>
+      </div>
+
+      <div>
+        <h2 className="font-bold">User Server</h2>
+        <div className="border-2 p-4 rounded text-center">
+          {JSON.stringify(session)}
+        </div>
       </div>
     </div>
   );
