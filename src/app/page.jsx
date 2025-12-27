@@ -2,12 +2,10 @@ import { RiNextjsLine } from "react-icons/ri";
 import { FaReact } from "react-icons/fa";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { SiMongodb } from "react-icons/si";
-import Link from "next/link";
-import LoginButton from "@/components/LoginButton";
 import UserCard from "@/components/UserCard";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthButtons from "@/components/AuthButtons";
+import { authOptions } from "@/lib/authOptions";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   console.log("from server", session);

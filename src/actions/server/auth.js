@@ -1,6 +1,6 @@
 "use server";
 
-import { dbConnect } from "@/lib/dbConnect";
+import { collections, dbConnect } from "@/lib/dbConnect";
 import bcrypt from "bcryptjs";
 import { IoCompassOutline } from "react-icons/io5";
 
@@ -22,7 +22,7 @@ export const postUser = async (payLoad) => {
   }
 
   //   1 - check if user exist or not
-  const isExist = await dbConnect("users").findOne({ email: payLoad.email });
+  const isExist = await dbConnect(collections.USER).findOne({ email: payLoad.email });
   if (isExist) {
     return {
       success: false,
@@ -41,7 +41,7 @@ export const postUser = async (payLoad) => {
   };
 
   // 3 - send user data to database
-  const res = await dbConnect("users").insertOne(newUser);
+  const res = await dbConnect(collections.USER).insertOne(newUser);
   if (res.acknowledged) {
     return {
       success: true,
